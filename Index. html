@@ -11,5 +11,58 @@
     <h1>StudyBuddy</h1>
 
     <script src="script.js"></script>
+
+<header>
+    <h1>StudyBuddy</h1>
+</header>
+
+<nav>
+    <a href="../index.html">Dashboard</a>
+    <a href="subjects.html">Subjects</a>
+    <a href="timer.html">Pomodoro Timer</a>
+    <a href="progress.html">Progress</a>
+</nav>
+
+<main>
+
+<section>
+    <h2>Add Subject</h2>
+
+    <form>
+        <label for="subject">Subject Name</label><br>
+        <input type="text" id="subject" name="subject"><br><br>
+
+        <label for="topic">Topic Name</label><br>
+        <input type="text" id="topic" name="topic"><br><br>
+
+        <button type="submit">Add Subject</button>
+    </form>
+</section>
+
+<section>
+    <h2>My Subjects</h2>
+
+    <h3>Computer Networks</h3>
+    <input type="checkbox"> DNS<br>
+    <input type="checkbox"> SNMP<br>
+    <input type="checkbox"> HTTP<br><br>
+
+    <h3>Operating Systems</h3>
+    <input type="checkbox"> Process Scheduling<br>
+    <input type="checkbox"> Deadlock<br>
+    <input type="checkbox"> Memory Management<br><br>
+
+    <h3>Database Management</h3>
+    <input type="checkbox"> SQL<br>
+    <input type="checkbox"> Normalization<br>
+    <input type="checkbox"> Transactions
+</section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 StudyBuddy</p>
+</footer>
+
 </body>
 </html>
