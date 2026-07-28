@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Subjects & Topics — StudyBuddy</title>
   <meta name="description" content="Manage your study subjects, add new topics with checkboxes, and track topic completion status.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-  <!-- Shared Header & Navigation -->
+  <!-- Header & Navigation -->
   <header>
     <div class="logo-area">
-      <span style="font-size: 1.8rem;">📚</span>
+      <span>📚</span>
       <h1>StudyBuddy</h1>
     </div>
     <nav aria-label="Main Navigation">
       <ul>
-        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="../index.html">Dashboard</a></li>
         <li><a href="subjects.html" class="active">Subjects & Topics</a></li>
         <li><a href="timer.html">Pomodoro Timer</a></li>
         <li><a href="progress.html">Progress</a></li>
@@ -75,7 +75,7 @@
             </select>
           </div>
 
-          <button type="submit" class="btn" style="width: 100%;">Create Subject</button>
+          <button type="submit" class="btn">Create Subject</button>
         </form>
       </section>
 
@@ -114,7 +114,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-secondary" style="width: 100%;">Add Topic</button>
+          <button type="submit" class="btn btn-secondary">Add Topic</button>
         </form>
       </section>
 
@@ -122,8 +122,8 @@
 
     <!-- Search & Filter Bar -->
     <section class="card" id="subject-search-bar">
-      <form id="subject-search-form" action="#" method="GET" class="form-row" style="align-items: flex-end;">
-        <div class="form-group" style="flex: 2;">
+      <form id="subject-search-form" action="#" method="GET" class="form-row filter-form-row">
+        <div class="form-group flex-2">
           <label for="search-subject-input">Filter Topics</label>
           <input type="text" id="search-subject-input" name="search-subject-input" placeholder="Type keyword to filter topics across all subjects...">
         </div>
@@ -143,21 +143,21 @@
       </form>
     </section>
 
-    <!-- Detailed Subject Accordions / Cards with Checkboxes -->
-    <section id="subject-list-section" style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <!-- Detailed Subject Cards with Checkboxes -->
+    <section id="subject-list-section" class="subject-card-stack">
       
       <!-- Subject 1 -->
       <article class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div class="subject-card-header">
           <div>
             <h3>💻 CS201 — Data Structures & Algorithms</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Target: 30 Hours • Progress: 2 of 4 topics completed (50%)</p>
+            <p class="section-subtext">Target: 30 Hours • Progress: 2 of 4 topics completed (50%)</p>
           </div>
           <span class="badge badge-high">High Priority</span>
         </div>
 
-        <div class="progress-bar-bg" style="margin-bottom: 1.25rem;">
-          <div class="progress-bar-fill" style="width: 50%;"></div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-50"></div>
         </div>
 
         <ul class="topic-list">
@@ -202,16 +202,16 @@
 
       <!-- Subject 2 -->
       <article class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div class="subject-card-header">
           <div>
             <h3>🌐 CS305 — Web Development</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Target: 25 Hours • Progress: 2 of 4 topics completed (50%)</p>
+            <p class="section-subtext">Target: 25 Hours • Progress: 2 of 4 topics completed (50%)</p>
           </div>
           <span class="badge badge-medium">Medium Priority</span>
         </div>
 
-        <div class="progress-bar-bg" style="margin-bottom: 1.25rem;">
-          <div class="progress-bar-fill" style="width: 50%;"></div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-50"></div>
         </div>
 
         <ul class="topic-list">
@@ -256,16 +256,16 @@
 
       <!-- Subject 3 -->
       <article class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <div class="subject-card-header">
           <div>
             <h3>📐 MATH101 — Mathematics & Calculus</h3>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Target: 20 Hours • Progress: 1 of 3 topics completed (33%)</p>
+            <p class="section-subtext">Target: 20 Hours • Progress: 1 of 3 topics completed (33%)</p>
           </div>
           <span class="badge badge-low">Normal</span>
         </div>
 
-        <div class="progress-bar-bg" style="margin-bottom: 1.25rem;">
-          <div class="progress-bar-fill" style="width: 33%;"></div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-33"></div>
         </div>
 
         <ul class="topic-list">
@@ -308,13 +308,13 @@
     <p><strong>StudyBuddy</strong> — Personal Study Planner & Pomodoro Tracker</p>
     <p>Developed by <strong>Suyash Srivastava</strong> & <strong>A. Akshaya</strong> | Zyora Internship Team 3</p>
     <div class="footer-links">
-      <a href="index.html">Dashboard</a> •
+      <a href="../index.html">Dashboard</a> •
       <a href="subjects.html">Subjects</a> •
       <a href="timer.html">Pomodoro Timer</a> •
       <a href="progress.html">Progress Analytics</a>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

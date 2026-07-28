@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Progress & Analytics — StudyBuddy</title>
   <meta name="description" content="Track study progress, view subject completion percentages, streak counter history, and set weekly learning targets.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-  <!-- Shared Header & Navigation -->
+  <!-- Header & Navigation -->
   <header>
     <div class="logo-area">
-      <span style="font-size: 1.8rem;">📚</span>
+      <span>📚</span>
       <h1>StudyBuddy</h1>
     </div>
     <nav aria-label="Main Navigation">
       <ul>
-        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="../index.html">Dashboard</a></li>
         <li><a href="subjects.html">Subjects & Topics</a></li>
         <li><a href="timer.html">Pomodoro Timer</a></li>
         <li><a href="progress.html" class="active">Progress</a></li>
@@ -42,16 +42,16 @@
 
     <!-- Overall Summary Banner -->
     <section class="card" id="overall-progress-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+      <div class="progress-summary-header">
         <div>
           <h3>Overall Course Completion</h3>
-          <p style="color: var(--text-muted);">5 out of 11 total topics completed across 3 subjects</p>
+          <p class="section-subtext">5 out of 11 total topics completed across 3 subjects</p>
         </div>
-        <div style="font-size: 2.2rem; font-weight: 800; color: var(--secondary);">45%</div>
+        <div class="progress-percentage-large">45%</div>
       </div>
 
-      <div class="progress-bar-bg" style="height: 14px;">
-        <div class="progress-bar-fill" style="width: 45%;"></div>
+      <div class="progress-bar-bg progress-bar-large">
+        <div class="progress-bar-fill progress-fill-45"></div>
       </div>
     </section>
 
@@ -60,15 +60,15 @@
       
       <!-- CS201 Progress Card -->
       <article class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <div class="progress-card-header">
           <h4>💻 CS201: Data Structures</h4>
-          <span style="font-weight: 700; color: var(--primary);">50%</span>
+          <span class="progress-badge-primary">50%</span>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.75rem;">2 / 4 Topics Finished • 15h / 30h Studied</p>
+        <p class="section-subtext">2 / 4 Topics Finished • 15h / 30h Studied</p>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill" style="width: 50%;"></div>
+          <div class="progress-bar-fill progress-fill-50"></div>
         </div>
-        <ul style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); list-style: none;">
+        <ul class="progress-topic-breakdown">
           <li>✅ Arrays & Strings</li>
           <li>✅ Linked Lists & Stacks</li>
           <li>⏳ Binary Trees & BST (In Progress)</li>
@@ -78,15 +78,15 @@
 
       <!-- CS305 Progress Card -->
       <article class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <div class="progress-card-header">
           <h4>🌐 CS305: Web Development</h4>
-          <span style="font-weight: 700; color: var(--secondary);">50%</span>
+          <span class="progress-badge-secondary">50%</span>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.75rem;">2 / 4 Topics Finished • 12h / 25h Studied</p>
+        <p class="section-subtext">2 / 4 Topics Finished • 12h / 25h Studied</p>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill" style="width: 50%; background: linear-gradient(90deg, #06b6d4, #10b981);"></div>
+          <div class="progress-bar-fill progress-fill-50 progress-cyan"></div>
         </div>
-        <ul style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); list-style: none;">
+        <ul class="progress-topic-breakdown">
           <li>✅ HTML5 Semantic Structure</li>
           <li>✅ CSS Grid & Flexbox Layouts</li>
           <li>⏳ JavaScript DOM Manipulation (In Progress)</li>
@@ -96,15 +96,15 @@
 
       <!-- MATH101 Progress Card -->
       <article class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <div class="progress-card-header">
           <h4>📐 MATH101: Mathematics & Calculus</h4>
-          <span style="font-weight: 700; color: var(--accent);">33%</span>
+          <span class="progress-badge-accent">33%</span>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.75rem;">1 / 3 Topics Finished • 6h / 20h Studied</p>
+        <p class="section-subtext">1 / 3 Topics Finished • 6h / 20h Studied</p>
         <div class="progress-bar-bg">
-          <div class="progress-bar-fill" style="width: 33%; background: linear-gradient(90deg, #f59e0b, #ef4444);"></div>
+          <div class="progress-bar-fill progress-fill-33 progress-amber"></div>
         </div>
-        <ul style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); list-style: none;">
+        <ul class="progress-topic-breakdown">
           <li>✅ Limits & Continuity</li>
           <li>⏳ Derivatives & Chain Rule (Pending)</li>
           <li>⏳ Integration Techniques (Pending)</li>
@@ -112,16 +112,16 @@
       </article>
 
       <!-- Streak & Badges Card -->
-      <article class="card" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+      <article class="card achievement-card">
         <h4>🏆 Achievements & Streak Status</h4>
-        <div style="display: flex; gap: 1rem; align-items: center; margin: 1rem 0;">
-          <div style="font-size: 3rem;">🔥</div>
+        <div class="streak-banner">
+          <div class="streak-icon">🔥</div>
           <div>
-            <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent);">5 Day Active Streak</div>
-            <p style="color: var(--text-muted); font-size: 0.85rem;">Last studied: Today at 02:00 PM</p>
+            <div class="streak-title">5 Day Active Streak</div>
+            <p class="section-subtext">Last studied: Today at 02:00 PM</p>
           </div>
         </div>
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+        <div class="badge-row">
           <span class="badge badge-medium">🎖️ 5-Day Warrior</span>
           <span class="badge badge-low">🍅 Pomodoro Novice</span>
           <span class="badge badge-high">📚 Topic Crusher</span>
@@ -158,7 +158,7 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-secondary" style="width: 100%;">Update Analytics View</button>
+          <button type="submit" class="btn btn-secondary">Update Analytics View</button>
         </form>
       </section>
 
@@ -183,7 +183,7 @@
             <textarea id="weekly-reflection" name="weekly-reflection" rows="2" placeholder="How did studying go this week? What challenges did you encounter?"></textarea>
           </div>
 
-          <button type="submit" class="btn" style="width: 100%;">Save Weekly Targets</button>
+          <button type="submit" class="btn">Save Weekly Targets</button>
         </form>
       </section>
 
@@ -196,13 +196,13 @@
     <p><strong>StudyBuddy</strong> — Personal Study Planner & Pomodoro Tracker</p>
     <p>Developed by <strong>Suyash Srivastava</strong> & <strong>A. Akshaya</strong> | Zyora Internship Team 3</p>
     <div class="footer-links">
-      <a href="index.html">Dashboard</a> •
+      <a href="../index.html">Dashboard</a> •
       <a href="subjects.html">Subjects</a> •
       <a href="timer.html">Pomodoro Timer</a> •
       <a href="progress.html">Progress Analytics</a>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

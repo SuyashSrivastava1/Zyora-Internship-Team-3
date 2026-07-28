@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StudyBuddy — Study Planner & Dashboard</title>
+  <title>StudyBuddy — Study Planner Dashboard</title>
   <meta name="description" content="Personal study planner dashboard to track daily study streaks, manage subjects, and focus with Pomodoro timers.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- Shared Header & Navigation -->
+  <!-- Header & Navigation -->
   <header>
     <div class="logo-area">
-      <span style="font-size: 1.8rem;">📚</span>
+      <span>📚</span>
       <h1>StudyBuddy</h1>
     </div>
     <nav aria-label="Main Navigation">
       <ul>
         <li><a href="index.html" class="active">Dashboard</a></li>
-        <li><a href="subjects.html">Subjects & Topics</a></li>
-        <li><a href="timer.html">Pomodoro Timer</a></li>
-        <li><a href="progress.html">Progress</a></li>
+        <li><a href="pages/subjects.html">Subjects & Topics</a></li>
+        <li><a href="pages/timer.html">Pomodoro Timer</a></li>
+        <li><a href="pages/progress.html">Progress</a></li>
       </ul>
     </nav>
     <div class="user-badge">
@@ -33,15 +33,13 @@
   <main id="main-content">
     
     <!-- Hero / Welcome Banner -->
-    <section class="card" id="welcome-banner" style="background: linear-gradient(135deg, #1e1b4b, #312e81); border-color: #4338ca;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <h2>Welcome back, Suyash! 👋</h2>
-          <p style="color: #c7d2fe;">You're on a 5-day study streak! Keep up the momentum for your upcoming midterms.</p>
-        </div>
-        <div>
-          <a href="timer.html" class="btn" style="background: #06b6d4; text-decoration: none;">▶️ Launch 25-Min Focus Session</a>
-        </div>
+    <section class="card" id="welcome-banner">
+      <div>
+        <h2>Welcome back, Suyash! 👋</h2>
+        <p>You are on a 5-day study streak! Keep up the momentum for your upcoming midterms.</p>
+      </div>
+      <div>
+        <a href="pages/timer.html" class="btn">▶️ Launch 25-Min Focus Session</a>
       </div>
     </section>
 
@@ -86,9 +84,7 @@
       <!-- High Priority Topics Column -->
       <section class="card" id="priority-topics-section">
         <h3>📌 Today's High Priority Topics</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
-          Focus on completing these core topics before your evening review.
-        </p>
+        <p>Focus on completing these core topics before your evening review.</p>
 
         <ul class="topic-list" id="dashboard-topic-list">
           <li class="topic-item">
@@ -123,7 +119,7 @@
       </section>
 
       <!-- Search & Quick Add Form Column -->
-      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <div class="form-column">
         
         <!-- Search & Filter Form -->
         <section class="card" id="search-filter-section">
@@ -156,7 +152,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-secondary" style="width: 100%;">Apply Filters</button>
+            <button type="submit" class="btn btn-secondary">Apply Filters</button>
           </form>
         </section>
 
@@ -190,7 +186,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn" style="width: 100%;">Add Topic to List</button>
+            <button type="submit" class="btn">Add Topic to List</button>
           </form>
         </section>
 
@@ -205,12 +201,12 @@
     <p>Developed by <strong>Suyash Srivastava</strong> & <strong>A. Akshaya</strong> | Zyora Internship Team 3</p>
     <div class="footer-links">
       <a href="index.html">Dashboard</a> •
-      <a href="subjects.html">Subjects</a> •
-      <a href="timer.html">Pomodoro Timer</a> •
-      <a href="progress.html">Progress Analytics</a>
+      <a href="pages/subjects.html">Subjects</a> •
+      <a href="pages/timer.html">Pomodoro Timer</a> •
+      <a href="pages/progress.html">Progress Analytics</a>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

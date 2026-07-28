@@ -1,4 +1,4 @@
-/* Base Reset & Design Tokens */
+/* StudyBuddy CSS Stylesheet */
 :root {
   --primary: #6366f1;
   --primary-hover: #4f46e5;
@@ -52,6 +52,10 @@ header {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.logo-area span {
+  font-size: 1.8rem;
 }
 
 .logo-area h1 {
@@ -134,7 +138,22 @@ main {
   color: var(--text-muted);
 }
 
-/* Dashboard & Layout Grids */
+/* Welcome Banner */
+#welcome-banner {
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  border-color: #4338ca;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#welcome-banner p {
+  color: #c7d2fe;
+}
+
+/* Grids */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -145,6 +164,12 @@ main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.25rem;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 /* Cards */
@@ -158,10 +183,7 @@ main {
 
 .card h3 {
   font-size: 1.2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .stat-card {
@@ -197,6 +219,7 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
 }
 
 .form-group {
@@ -216,10 +239,25 @@ form {
   min-width: 200px;
 }
 
+.filter-form-row {
+  align-items: flex-end;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
 label {
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--text-main);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
 }
 
 input[type="text"],
@@ -257,6 +295,8 @@ textarea:focus {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  text-decoration: none;
+  width: 100%;
   transition: background 0.2s ease;
 }
 
@@ -282,12 +322,13 @@ textarea:focus {
   background: var(--success);
 }
 
-/* Lists & Checklists */
-.topic-list, .subject-list {
+/* Topic Checklists */
+.topic-list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  margin-top: 1rem;
 }
 
 .topic-item {
@@ -313,6 +354,7 @@ textarea:focus {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
+  display: inline-block;
 }
 
 .badge-high { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
@@ -329,6 +371,10 @@ textarea:focus {
   margin-top: 0.5rem;
 }
 
+.progress-bar-large {
+  height: 14px;
+}
+
 .progress-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
@@ -336,10 +382,55 @@ textarea:focus {
   transition: width 0.3s ease;
 }
 
-/* Timer Display */
+.progress-fill-50 { width: 50%; }
+.progress-fill-33 { width: 33%; }
+.progress-fill-45 { width: 45%; }
+.progress-cyan { background: linear-gradient(90deg, #06b6d4, #10b981); }
+.progress-amber { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+.subject-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.subject-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtext {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Timer Display Page */
 .timer-box {
   text-align: center;
   padding: 2.5rem;
+}
+
+.timer-mode-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.timer-mode-group .btn {
+  width: auto;
+}
+
+.active-task-text {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.active-task-text strong {
+  color: var(--secondary);
 }
 
 .timer-clock {
@@ -356,6 +447,100 @@ textarea:focus {
   justify-content: center;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+.timer-controls .btn {
+  width: auto;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.8rem;
+}
+
+/* Session History Table */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.session-table th {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.session-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Progress Page Components */
+.progress-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-percentage-large {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--secondary);
+}
+
+.progress-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.progress-badge-primary { font-weight: 700; color: var(--primary); }
+.progress-badge-secondary { font-weight: 700; color: var(--secondary); }
+.progress-badge-accent { font-weight: 700; color: var(--accent); }
+
+.progress-topic-breakdown {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.achievement-card {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+}
+
+.streak-banner {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.streak-icon {
+  font-size: 3rem;
+}
+
+.streak-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.badge-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 /* Footer */
