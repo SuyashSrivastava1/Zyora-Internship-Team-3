@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer — StudyBuddy</title>
+  <meta name="description" content="25-minute Pomodoro study timer with break controls, active subject assignment, and session history tracking.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Shared Header & Navigation -->
+  <header>
+    <div class="logo-area">
+      <span style="font-size: 1.8rem;">📚</span>
+      <h1>StudyBuddy</h1>
+    </div>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="subjects.html">Subjects & Topics</a></li>
+        <li><a href="timer.html" class="active">Pomodoro Timer</a></li>
+        <li><a href="progress.html">Progress</a></li>
+      </ul>
+    </nav>
+    <div class="user-badge">
+      <span>👤 Suyash</span>
+      <span class="streak-pill">🔥 5 Day Streak</span>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="main-content">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2>⏱️ 25-Min Pomodoro Focus Timer</h2>
+        <p>Boost your productivity with timed focus blocks and mandatory breaks.</p>
+      </div>
+      <div>
+        <span class="badge badge-high" style="font-size: 0.9rem; padding: 0.5rem 1rem;">🎯 Today's Goal: 4 Pomodoros (2 Completed)</span>
+      </div>
+    </div>
+
+    <!-- Central Pomodoro Timer Display Card -->
+    <section class="card timer-box" id="pomodoro-timer-card">
+      
+      <!-- Mode Selection Buttons -->
+      <div style="display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button type="button" class="btn" id="mode-work" style="background: var(--primary);">🍅 Focus Work (25m)</button>
+        <button type="button" class="btn btn-secondary" id="mode-short-break">☕ Short Break (5m)</button>
+        <button type="button" class="btn btn-secondary" id="mode-long-break">🌴 Long Break (15m)</button>
+      </div>
+
+      <!-- Active Subject / Topic Tag -->
+      <p style="color: var(--text-muted); font-size: 1.1rem;">
+        Current Task: <strong style="color: var(--secondary);" id="active-task-label">CS201: Binary Trees & BST</strong>
+      </p>
+
+      <!-- Digital Clock -->
+      <div class="timer-clock" id="timer-display" aria-live="polite">25:00</div>
+
+      <!-- Controls -->
+      <div class="timer-controls">
+        <button type="button" class="btn btn-success" id="btn-start" style="font-size: 1.1rem; padding: 0.8rem 2rem;">▶️ Start Focus</button>
+        <button type="button" class="btn btn-secondary" id="btn-pause" style="font-size: 1.1rem; padding: 0.8rem 1.5rem;">⏸️ Pause</button>
+        <button type="button" class="btn btn-danger" id="btn-reset" style="font-size: 1.1rem; padding: 0.8rem 1.5rem;">🔄 Reset</button>
+      </div>
+    </section>
+
+    <!-- Two-Column Grid: Settings Form & Manual Session Log Form -->
+    <div class="grid-2">
+
+      <!-- Timer Customization / Settings Form -->
+      <section class="card" id="timer-config-card">
+        <h3>⚙️ Timer Settings & Session Focus</h3>
+        <form id="timer-settings-form" action="#" method="POST">
+          
+          <div class="form-group">
+            <label for="focus-subject-select">Select Active Subject</label>
+            <select id="focus-subject-select" name="focus-subject-select" required>
+              <option value="CS201" selected>CS201: Data Structures & Algorithms</option>
+              <option value="CS305">CS305: Web Development</option>
+              <option value="MATH101">MATH101: Mathematics & Calculus</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="focus-topic-select">Select Active Topic</label>
+            <select id="focus-topic-select" name="focus-topic-select">
+              <option value="Binary Trees & BST" selected>Binary Trees & BST</option>
+              <option value="Graph Algorithms">Graph Algorithms</option>
+              <option value="JavaScript DOM">JavaScript DOM Manipulation</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="work-duration">Work Mins</label>
+              <input type="number" id="work-duration" name="work-duration" value="25" min="1" max="120" required>
+            </div>
+
+            <div class="form-group">
+              <label for="break-duration">Break Mins</label>
+              <input type="number" id="break-duration" name="break-duration" value="5" min="1" max="30" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="auto-start-breaks" style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="auto-start-breaks" name="auto-start-breaks" checked>
+              Auto-start break when work timer finishes
+            </label>
+          </div>
+
+          <button type="submit" class="btn" style="width: 100%;">Save Timer Preferences</button>
+        </form>
+      </section>
+
+      <!-- Manual Study Session Log Form -->
+      <section class="card" id="manual-log-card">
+        <h3>📝 Log Offline Study Session</h3>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.75rem;">
+          Studied offline or from textbook? Log your session manually to keep your streak going!
+        </p>
+
+        <form id="manual-log-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="manual-subject">Subject</label>
+            <select id="manual-subject" name="manual-subject" required>
+              <option value="CS201">CS201: Data Structures</option>
+              <option value="CS305">CS305: Web Development</option>
+              <option value="MATH101">MATH101: Calculus</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="manual-minutes">Duration (Minutes)</label>
+              <input type="number" id="manual-minutes" name="manual-minutes" min="5" max="360" placeholder="e.g. 45" required>
+            </div>
+
+            <div class="form-group">
+              <label for="session-time">Time Completed</label>
+              <input type="time" id="session-time" name="session-time" value="14:30">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="session-notes">Session Notes / Key Learnings</label>
+            <textarea id="session-notes" name="session-notes" rows="2" placeholder="e.g. Solved 5 LeetCode BST problems..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-secondary" style="width: 100%;">Log Manual Session</button>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- Completed Sessions History Table -->
+    <section class="card" id="session-history-section">
+      <h3>📜 Today's Completed Sessions</h3>
+      <div style="overflow-x: auto; margin-top: 1rem;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted);">
+              <th style="padding: 0.75rem;">Subject</th>
+              <th style="padding: 0.75rem;">Topic / Focus</th>
+              <th style="padding: 0.75rem;">Duration</th>
+              <th style="padding: 0.75rem;">Time</th>
+              <th style="padding: 0.75rem;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 0.75rem;"><strong>CS201</strong></td>
+              <td style="padding: 0.75rem;">Arrays & Sliding Window</td>
+              <td style="padding: 0.75rem;">25 mins</td>
+              <td style="padding: 0.75rem;">09:30 AM</td>
+              <td style="padding: 0.75rem;"><span class="badge badge-low">Completed</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 0.75rem;"><strong>CS305</strong></td>
+              <td style="padding: 0.75rem;">CSS Grid & Flexbox</td>
+              <td style="padding: 0.75rem;">25 mins</td>
+              <td style="padding: 0.75rem;">11:15 AM</td>
+              <td style="padding: 0.75rem;"><span class="badge badge-low">Completed</span></td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem;"><strong>MATH101</strong></td>
+              <td style="padding: 0.75rem;">Limits & Continuity</td>
+              <td style="padding: 0.75rem;">50 mins (Manual)</td>
+              <td style="padding: 0.75rem;">02:00 PM</td>
+              <td style="padding: 0.75rem;"><span class="badge badge-low">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer>
+    <p><strong>StudyBuddy</strong> — Personal Study Planner & Pomodoro Tracker</p>
+    <p>Developed by <strong>Suyash Srivastava</strong> & <strong>A. Akshaya</strong> | Zyora Internship Team 3</p>
+    <div class="footer-links">
+      <a href="index.html">Dashboard</a> •
+      <a href="subjects.html">Subjects</a> •
+      <a href="timer.html">Pomodoro Timer</a> •
+      <a href="progress.html">Progress Analytics</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
