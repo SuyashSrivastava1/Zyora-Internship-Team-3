@@ -13,6 +13,8 @@ zyora-intrnship-team-3/
 ├── index.html            # Dashboard — Main Landing Page (Suyash)
 ├── pages/
 │   └── timer.html        # Pomodoro Focus Timer (Suyash)
+├── css/                  # Directory for future CSS styles
+├── js/                   # Directory for future JavaScript logic
 └── images/               # Project Assets & Screenshots
 ```
 
