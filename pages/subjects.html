@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subjects & Topics — StudyBuddy</title>
+  <meta name="description" content="Manage your study subjects, add new topics with checkboxes, and track topic completion status.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="logo-area">
+      <span>📚</span>
+      <h1>StudyBuddy</h1>
+    </div>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="subjects.html" class="active">Subjects & Topics</a></li>
+        <li><a href="timer.html">Pomodoro Timer</a></li>
+        <li><a href="progress.html">Progress</a></li>
+      </ul>
+    </nav>
+    <div class="user-badge">
+      <span>👤 Akshaya</span>
+      <span class="streak-pill">🔥 5 Day Streak</span>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="main-content">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2>📘 Subjects & Topic Management</h2>
+        <p>Organize your curriculum into subjects and topics with interactive checklists.</p>
+      </div>
+    </div>
+
+    <!-- Forms Section (Add Subject & Add Topic Forms) -->
+    <div class="grid-2">
+      
+      <!-- Form 1: Add New Subject -->
+      <section class="card" id="add-subject-card">
+        <h3>➕ Add New Subject</h3>
+        <form id="add-subject-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="subject-name">Subject Name</label>
+            <input type="text" id="subject-name" name="subject-name" placeholder="e.g. Operating Systems" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="subject-code">Course Code</label>
+              <input type="text" id="subject-code" name="subject-code" placeholder="e.g. CS301" required>
+            </div>
+
+            <div class="form-group">
+              <label for="target-hours">Target Hours</label>
+              <input type="number" id="target-hours" name="target-hours" min="1" max="200" placeholder="e.g. 30" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject-category">Category / Department</label>
+            <select id="subject-category" name="subject-category">
+              <option value="cs">Computer Science</option>
+              <option value="math">Mathematics</option>
+              <option value="science">Sciences</option>
+              <option value="humanities">Humanities & Languages</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn">Create Subject</button>
+        </form>
+      </section>
+
+      <!-- Form 2: Add Topic to Subject -->
+      <section class="card" id="add-topic-card">
+        <h3>📝 Add Topic to Subject</h3>
+        <form id="add-topic-form" action="#" method="POST">
+          <div class="form-group">
+            <label for="select-parent-subject">Belongs to Subject</label>
+            <select id="select-parent-subject" name="select-parent-subject" required>
+              <option value="">Choose a subject...</option>
+              <option value="CS201">CS201: Data Structures & Algorithms</option>
+              <option value="CS305">CS305: Web Development</option>
+              <option value="MATH101">MATH101: Mathematics & Calculus</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="topic-title">Topic Title</label>
+            <input type="text" id="topic-title" name="topic-title" placeholder="e.g. Recursion & Backtracking" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="estimated-mins">Est. Study Mins</label>
+              <input type="number" id="estimated-mins" name="estimated-mins" min="10" max="300" step="5" placeholder="e.g. 50">
+            </div>
+
+            <div class="form-group">
+              <label for="topic-priority-select">Priority Level</label>
+              <select id="topic-priority-select" name="topic-priority-select">
+                <option value="high">High Priority</option>
+                <option value="medium" selected>Medium Priority</option>
+                <option value="low">Low Priority</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-secondary">Add Topic</button>
+        </form>
+      </section>
+
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <section class="card" id="subject-search-bar">
+      <form id="subject-search-form" action="#" method="GET" class="form-row filter-form-row">
+        <div class="form-group flex-2">
+          <label for="search-subject-input">Filter Topics</label>
+          <input type="text" id="search-subject-input" name="search-subject-input" placeholder="Type keyword to filter topics across all subjects...">
+        </div>
+
+        <div class="form-group">
+          <label for="status-filter">Status</label>
+          <select id="status-filter" name="status-filter">
+            <option value="all">All Topics</option>
+            <option value="pending">Pending Only</option>
+            <option value="completed">Completed Only</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn">Filter</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Detailed Subject Cards with Checkboxes -->
+    <section id="subject-list-section" class="subject-card-stack">
+      
+      <!-- Subject 1 -->
+      <article class="card">
+        <div class="subject-card-header">
+          <div>
+            <h3>💻 CS201 — Data Structures & Algorithms</h3>
+            <p class="section-subtext">Target: 30 Hours • Progress: 2 of 4 topics completed (50%)</p>
+          </div>
+          <span class="badge badge-high">High Priority</span>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-50"></div>
+        </div>
+
+        <ul class="topic-list">
+          <li class="topic-item">
+            <label for="cs201-top-1">
+              <input type="checkbox" id="cs201-top-1" name="cs201-top-1" checked>
+              <span>Arrays & Strings (Sliding Window, Two Pointers)</span>
+            </label>
+            <div>
+              <span class="badge badge-low">Completed</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="cs201-top-2">
+              <input type="checkbox" id="cs201-top-2" name="cs201-top-2" checked>
+              <span>Linked Lists & Stacks (Singly, Doubly, Stack Ops)</span>
+            </label>
+            <div>
+              <span class="badge badge-low">Completed</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="cs201-top-3">
+              <input type="checkbox" id="cs201-top-3" name="cs201-top-3">
+              <span>Binary Trees & Binary Search Trees (Traversal, Balancing)</span>
+            </label>
+            <div>
+              <span class="badge badge-high">High</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="cs201-top-4">
+              <input type="checkbox" id="cs201-top-4" name="cs201-top-4">
+              <span>Graph Algorithms (Dijkstra, BFS/DFS Traversal)</span>
+            </label>
+            <div>
+              <span class="badge badge-medium">Medium</span>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Subject 2 -->
+      <article class="card">
+        <div class="subject-card-header">
+          <div>
+            <h3>🌐 CS305 — Web Development</h3>
+            <p class="section-subtext">Target: 25 Hours • Progress: 2 of 4 topics completed (50%)</p>
+          </div>
+          <span class="badge badge-medium">Medium Priority</span>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-50"></div>
+        </div>
+
+        <ul class="topic-list">
+          <li class="topic-item">
+            <label for="cs305-top-1">
+              <input type="checkbox" id="cs305-top-1" name="cs305-top-1" checked>
+              <span>HTML5 Semantic Structure & Forms</span>
+            </label>
+            <div>
+              <span class="badge badge-low">Completed</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="cs305-top-2">
+              <input type="checkbox" id="cs305-top-2" name="cs305-top-2" checked>
+              <span>CSS Grid & Flexbox Responsive Layouts</span>
+            </label>
+            <div>
+              <span class="badge badge-low">Completed</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="cs305-top-3">
+              <input type="checkbox" id="cs305-top-3" name="cs305-top-3">
+              <span>JavaScript DOM Manipulation & Event Handlers</span>
+            </label>
+            <div>
+              <span class="badge badge-high">High</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="cs305-top-4">
+              <input type="checkbox" id="cs305-top-4" name="cs305-top-4">
+              <span>Fetch API & LocalStorage State Persistence</span>
+            </label>
+            <div>
+              <span class="badge badge-high">High</span>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Subject 3 -->
+      <article class="card">
+        <div class="subject-card-header">
+          <div>
+            <h3>📐 MATH101 — Mathematics & Calculus</h3>
+            <p class="section-subtext">Target: 20 Hours • Progress: 1 of 3 topics completed (33%)</p>
+          </div>
+          <span class="badge badge-low">Normal</span>
+        </div>
+
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-33"></div>
+        </div>
+
+        <ul class="topic-list">
+          <li class="topic-item">
+            <label for="math-top-1">
+              <input type="checkbox" id="math-top-1" name="math-top-1" checked>
+              <span>Limits & Continuity Essentials</span>
+            </label>
+            <div>
+              <span class="badge badge-low">Completed</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="math-top-2">
+              <input type="checkbox" id="math-top-2" name="math-top-2">
+              <span>Derivatives, Chain Rule & Implicit Differentiation</span>
+            </label>
+            <div>
+              <span class="badge badge-medium">Medium</span>
+            </div>
+          </li>
+          <li class="topic-item">
+            <label for="math-top-3">
+              <input type="checkbox" id="math-top-3" name="math-top-3">
+              <span>Integration Techniques & Definite Integrals</span>
+            </label>
+            <div>
+              <span class="badge badge-high">High</span>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+    </section>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer>
+    <p><strong>StudyBuddy</strong> — Personal Study Planner & Pomodoro Tracker</p>
+    <p>Developed by <strong>Suyash Srivastava</strong> & <strong>A. Akshaya</strong> | Zyora Internship Team 3</p>
+    <div class="footer-links">
+      <a href="../index.html">Dashboard</a> •
+      <a href="subjects.html">Subjects</a> •
+      <a href="timer.html">Pomodoro Timer</a> •
+      <a href="progress.html">Progress Analytics</a>
+    </div>
+  </footer>
+
+</body>
+</html>

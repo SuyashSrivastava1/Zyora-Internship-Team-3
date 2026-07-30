@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress & Analytics — StudyBuddy</title>
+  <meta name="description" content="Track study progress, view subject completion percentages, streak counter history, and set weekly learning targets.">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header>
+    <div class="logo-area">
+      <span>📚</span>
+      <h1>StudyBuddy</h1>
+    </div>
+    <nav aria-label="Main Navigation">
+      <ul>
+        <li><a href="../index.html">Dashboard</a></li>
+        <li><a href="subjects.html">Subjects & Topics</a></li>
+        <li><a href="timer.html">Pomodoro Timer</a></li>
+        <li><a href="progress.html" class="active">Progress</a></li>
+      </ul>
+    </nav>
+    <div class="user-badge">
+      <span>👤 Akshaya</span>
+      <span class="streak-pill">🔥 5 Day Streak</span>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main id="main-content">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h2>📊 Progress Analytics & Streak Tracker</h2>
+        <p>Visual statistics and completion metrics across all your enrolled subjects.</p>
+      </div>
+    </div>
+
+    <!-- Overall Summary Banner -->
+    <section class="card" id="overall-progress-card">
+      <div class="progress-summary-header">
+        <div>
+          <h3>Overall Course Completion</h3>
+          <p class="section-subtext">5 out of 11 total topics completed across 3 subjects</p>
+        </div>
+        <div class="progress-percentage-large">45%</div>
+      </div>
+
+      <div class="progress-bar-bg progress-bar-large">
+        <div class="progress-bar-fill progress-fill-45"></div>
+      </div>
+    </section>
+
+    <!-- Progress per Subject Cards Grid -->
+    <section id="subject-progress-grid" class="grid-2">
+      
+      <!-- CS201 Progress Card -->
+      <article class="card">
+        <div class="progress-card-header">
+          <h4>💻 CS201: Data Structures</h4>
+          <span class="progress-badge-primary">50%</span>
+        </div>
+        <p class="section-subtext">2 / 4 Topics Finished • 15h / 30h Studied</p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-50"></div>
+        </div>
+        <ul class="progress-topic-breakdown">
+          <li>✅ Arrays & Strings</li>
+          <li>✅ Linked Lists & Stacks</li>
+          <li>⏳ Binary Trees & BST (In Progress)</li>
+          <li>⏳ Graph Algorithms (Pending)</li>
+        </ul>
+      </article>
+
+      <!-- CS305 Progress Card -->
+      <article class="card">
+        <div class="progress-card-header">
+          <h4>🌐 CS305: Web Development</h4>
+          <span class="progress-badge-secondary">50%</span>
+        </div>
+        <p class="section-subtext">2 / 4 Topics Finished • 12h / 25h Studied</p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-50 progress-cyan"></div>
+        </div>
+        <ul class="progress-topic-breakdown">
+          <li>✅ HTML5 Semantic Structure</li>
+          <li>✅ CSS Grid & Flexbox Layouts</li>
+          <li>⏳ JavaScript DOM Manipulation (In Progress)</li>
+          <li>⏳ Fetch API & LocalStorage (Pending)</li>
+        </ul>
+      </article>
+
+      <!-- MATH101 Progress Card -->
+      <article class="card">
+        <div class="progress-card-header">
+          <h4>📐 MATH101: Mathematics & Calculus</h4>
+          <span class="progress-badge-accent">33%</span>
+        </div>
+        <p class="section-subtext">1 / 3 Topics Finished • 6h / 20h Studied</p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill progress-fill-33 progress-amber"></div>
+        </div>
+        <ul class="progress-topic-breakdown">
+          <li>✅ Limits & Continuity</li>
+          <li>⏳ Derivatives & Chain Rule (Pending)</li>
+          <li>⏳ Integration Techniques (Pending)</li>
+        </ul>
+      </article>
+
+      <!-- Streak & Badges Card -->
+      <article class="card achievement-card">
+        <h4>🏆 Achievements & Streak Status</h4>
+        <div class="streak-banner">
+          <div class="streak-icon">🔥</div>
+          <div>
+            <div class="streak-title">5 Day Active Streak</div>
+            <p class="section-subtext">Last studied: Today at 02:00 PM</p>
+          </div>
+        </div>
+        <div class="badge-row">
+          <span class="badge badge-medium">🎖️ 5-Day Warrior</span>
+          <span class="badge badge-low">🍅 Pomodoro Novice</span>
+          <span class="badge badge-high">📚 Topic Crusher</span>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Two-Column Section: Date Filter Form & Goal Reflection Form -->
+    <div class="grid-2">
+
+      <!-- Form 1: Progress Date Range Filter -->
+      <section class="card" id="date-filter-card">
+        <h3>📅 Filter Analytics by Date</h3>
+        <form id="progress-filter-form" action="#" method="GET">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="start-date">Start Date</label>
+              <input type="date" id="start-date" name="start-date" value="2026-07-20">
+            </div>
+
+            <div class="form-group">
+              <label for="end-date">End Date</label>
+              <input type="date" id="end-date" name="end-date" value="2026-07-28">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="view-type">Grouping View</label>
+            <select id="view-type" name="view-type">
+              <option value="daily">Daily Breakdown</option>
+              <option value="weekly" selected>Weekly Summary</option>
+              <option value="monthly">Monthly Overview</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-secondary">Update Analytics View</button>
+        </form>
+      </section>
+
+      <!-- Form 2: Weekly Goal Setting & Self Reflection -->
+      <section class="card" id="goal-reflection-card">
+        <h3>🎯 Weekly Target Goal & Reflection</h3>
+        <form id="weekly-goal-form" action="#" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="target-weekly-hours">Target Study Hours / Week</label>
+              <input type="number" id="target-weekly-hours" name="target-weekly-hours" value="15" min="1" max="100" required>
+            </div>
+
+            <div class="form-group">
+              <label for="target-topics-count">Target Topics / Week</label>
+              <input type="number" id="target-topics-count" name="target-topics-count" value="5" min="1" max="50" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="weekly-reflection">Weekly Self Reflection & Notes</label>
+            <textarea id="weekly-reflection" name="weekly-reflection" rows="2" placeholder="How did studying go this week? What challenges did you encounter?"></textarea>
+          </div>
+
+          <button type="submit" class="btn">Save Weekly Targets</button>
+        </form>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer>
+    <p><strong>StudyBuddy</strong> — Personal Study Planner & Pomodoro Tracker</p>
+    <p>Developed by <strong>Suyash Srivastava</strong> & <strong>A. Akshaya</strong> | Zyora Internship Team 3</p>
+    <div class="footer-links">
+      <a href="../index.html">Dashboard</a> •
+      <a href="subjects.html">Subjects</a> •
+      <a href="timer.html">Pomodoro Timer</a> •
+      <a href="progress.html">Progress Analytics</a>
+    </div>
+  </footer>
+
+</body>
+</html>
