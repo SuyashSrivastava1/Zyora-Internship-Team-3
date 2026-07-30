@@ -45,13 +45,13 @@
       <div class="progress-summary-header">
         <div>
           <h3>Overall Course Completion</h3>
-          <p class="section-subtext">5 out of 11 total topics completed across 3 subjects</p>
+          <p class="section-subtext" id="overall-subtext">5 out of 11 total topics completed across 3 subjects</p>
         </div>
-        <div class="progress-percentage-large">45%</div>
+        <div class="progress-percentage-large" id="overall-pct">45%</div>
       </div>
 
       <div class="progress-bar-bg progress-bar-large">
-        <div class="progress-bar-fill progress-fill-45"></div>
+        <div class="progress-bar-fill progress-fill-45" id="overall-bar-fill"></div>
       </div>
     </section>
 
@@ -112,16 +112,16 @@
       </article>
 
       <!-- Streak & Badges Card -->
-      <article class="card achievement-card">
+      <article class="card achievement-card" id="streak-achievements-card">
         <h4>🏆 Achievements & Streak Status</h4>
         <div class="streak-banner">
           <div class="streak-icon">🔥</div>
           <div>
-            <div class="streak-title">5 Day Active Streak</div>
-            <p class="section-subtext">Last studied: Today at 02:00 PM</p>
+            <div class="streak-title" id="streak-count">5 Day Active Streak</div>
+            <p class="section-subtext">Last studied: Today</p>
           </div>
         </div>
-        <div class="badge-row">
+        <div class="badge-row" id="achievement-badge-row">
           <span class="badge badge-medium">🎖️ 5-Day Warrior</span>
           <span class="badge badge-low">🍅 Pomodoro Novice</span>
           <span class="badge badge-high">📚 Topic Crusher</span>
@@ -202,6 +202,7 @@
       <a href="progress.html">Progress Analytics</a>
     </div>
   </footer>
-
+  <script src="../js/script.js"></script>
+  <script src="../js/progress.js"></script>
 </body>
 </html>

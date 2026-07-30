@@ -716,3 +716,241 @@ footer p {
     width: 100%;
   }
 }
+
+/* ==========================================================================
+   Day 3 — Interactive States: Toasts, Errors, Empty States, JS Elements
+   ========================================================================== */
+
+/* --- Toast Notifications --- */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  max-width: 380px;
+  min-width: 280px;
+  z-index: 9999;
+  transform: translateX(110%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.toast.toast-visible {
+  transform: translateX(0);
+}
+
+.toast-success { border-left: 4px solid var(--success); }
+.toast-error   { border-left: 4px solid var(--danger);  }
+.toast-info    { border-left: 4px solid var(--secondary); }
+
+.toast-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+.toast-message { flex: 1; color: var(--text); line-height: 1.4; }
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.toast-close:hover { color: var(--text); background: var(--bg-input); }
+
+/* --- Field Error States --- */
+.field-error {
+  border-color: var(--danger) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.field-error-msg {
+  display: block;
+  color: var(--danger);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+  padding-left: 0.2rem;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Completed Topic Strikethrough --- */
+.completed-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+
+/* --- Empty State Components --- */
+.empty-state {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  text-align: center;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.empty-state span { font-size: 2.5rem; }
+.empty-state p    { font-size: 0.95rem; }
+
+.empty-state-card {
+  background: var(--bg-card);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-state-card span { font-size: 2.5rem; }
+
+.empty-state-row td {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem !important;
+  font-style: italic;
+}
+
+/* --- Subject & Progress Card Page-Specific --- */
+.subject-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.subject-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.section-subtext {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.2rem;
+}
+
+.filter-form-row {
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.flex-2 { flex: 2; }
+
+/* --- Progress Page --- */
+.progress-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-percentage-large {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--secondary);
+}
+
+.progress-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.progress-badge-primary  { font-weight: 800; color: var(--primary);   font-size: 1.1rem; }
+.progress-badge-secondary { font-weight: 800; color: var(--secondary); font-size: 1.1rem; }
+.progress-badge-accent   { font-weight: 800; color: var(--accent);    font-size: 1.1rem; }
+
+.progress-topic-breakdown {
+  list-style: none;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.achievement-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), #0f172a);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.streak-banner {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin: 1.25rem 0;
+}
+
+.streak-icon { font-size: 3rem; animation: pulse-glow 3s infinite alternate; }
+
+.streak-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.badge-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+/* --- Delete Topic Button --- */
+.delete-topic-btn:hover {
+  color: var(--danger) !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+  border-radius: 4px;
+}
+
+/* --- Progress Bar Variants --- */
+.progress-fill-45 { width: 45%; }
+.progress-fill-50 { width: 50%; }
+.progress-fill-33 { width: 33%; }
+.progress-bar-large { height: 14px !important; }
+.progress-cyan  { background: linear-gradient(90deg, #06b6d4, #10b981) !important; }
+.progress-amber { background: linear-gradient(90deg, #f59e0b, #ef4444) !important; }
+
+@media (max-width: 480px) {
+  .toast {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+}

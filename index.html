@@ -25,7 +25,7 @@
     </nav>
     <div class="user-badge">
       <span>👤 Suyash</span>
-      <span class="streak-pill">🔥 5 Day Streak</span>
+      <span class="streak-pill" id="stat-streak-pill">🔥 5 Day Streak</span>
     </div>
   </header>
 
@@ -48,7 +48,7 @@
       <div class="card stat-card">
         <div class="stat-icon">🔥</div>
         <div>
-          <div class="stat-value">5 Days</div>
+          <div class="stat-value" id="stat-streak">5 Days</div>
           <div class="stat-label">Current Streak</div>
         </div>
       </div>
@@ -56,7 +56,7 @@
       <div class="card stat-card">
         <div class="stat-icon">📘</div>
         <div>
-          <div class="stat-value">3</div>
+          <div class="stat-value" id="stat-subjects">3</div>
           <div class="stat-label">Active Subjects</div>
         </div>
       </div>
@@ -64,7 +64,7 @@
       <div class="card stat-card">
         <div class="stat-icon">✅</div>
         <div>
-          <div class="stat-value">5 / 11</div>
+          <div class="stat-value" id="stat-topics">5 / 11</div>
           <div class="stat-label">Topics Completed</div>
         </div>
       </div>
@@ -72,7 +72,7 @@
       <div class="card stat-card">
         <div class="stat-icon">⏱️</div>
         <div>
-          <div class="stat-value">1h 40m</div>
+          <div class="stat-value" id="stat-time">1h 40m</div>
           <div class="stat-label">Study Time Today</div>
         </div>
       </div>
@@ -207,5 +207,7 @@
     </div>
   </footer>
 
+  <script src="js/script.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
