@@ -20,6 +20,7 @@ const MODES = {
 
 // ─── Initialization ───────────────────────────────────────────────────────────
 function initTimer() {
+  populateSubjectDropdowns(); // ← Must come BEFORE loadTimerPrefsIntoForm
   loadTimerPrefsIntoForm();
   loadSessionTable();
   setupModeButtons();
@@ -29,6 +30,68 @@ function initTimer() {
   updateDisplay();
   updateGoalBadge();
 }
+
+// ─── Dynamic Subject & Topic Dropdowns ───────────────────────────────────────
+function populateSubjectDropdowns() {
+  const subjects = getSubjects();
+
+  const focusSubSel  = document.getElementById('focus-subject-select');
+  const manualSubSel = document.getElementById('manual-subject');
+
+  // Helper to fill a subject <select>
+  function fillSubjectSelect(sel, placeholder) {
+    if (!sel) return;
+    sel.innerHTML = `<option value="">${placeholder}</option>`;
+    subjects.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value       = s.code;
+      opt.textContent = `${s.code}: ${s.name}`;
+      sel.appendChild(opt);
+    });
+  }
+
+  fillSubjectSelect(focusSubSel,  'Select subject…');
+  fillSubjectSelect(manualSubSel, 'Select subject…');
+
+  // Populate topic dropdown based on selected subject
+  if (focusSubSel) {
+    focusSubSel.addEventListener('change', () => {
+      populateTopicDropdown(focusSubSel.value);
+    });
+    // Pre-populate topics for the first/default subject
+    if (subjects.length > 0) {
+      focusSubSel.value = subjects[0].code;
+      populateTopicDropdown(subjects[0].code);
+    }
+  }
+}
+
+function populateTopicDropdown(subjectCode) {
+  const sel = document.getElementById('focus-topic-select');
+  if (!sel) return;
+
+  if (!subjectCode) {
+    sel.innerHTML = '<option value="">Select a subject first…</option>';
+    return;
+  }
+
+  const subjects = getSubjects();
+  const sub = subjects.find(s => s.code === subjectCode);
+
+  sel.innerHTML = '';
+  if (!sub || sub.topics.length === 0) {
+    sel.innerHTML = '<option value="">No topics yet — add some on the Subjects page!</option>';
+    return;
+  }
+
+  sub.topics.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value       = t.title;
+    opt.textContent = `${t.completed ? '✅' : '⏳'} ${t.title}`;
+    sel.appendChild(opt);
+  });
+}
+
 
 // ─── Load Prefs ───────────────────────────────────────────────────────────────
 function loadTimerPrefsIntoForm() {
@@ -46,6 +109,21 @@ function loadTimerPrefsIntoForm() {
   if (workInput)  workInput.value   = prefs.workMins;
   if (breakInput) breakInput.value  = prefs.breakMins;
   if (autoCheck)  autoCheck.checked = prefs.autoBreak;
+
+  // Restore saved subject + topic (dropdowns already populated by populateSubjectDropdowns)
+  if (subSel && prefs.subject) {
+    // Check if the saved subject still exists in the dropdown
+    if ([...subSel.options].some(o => o.value === prefs.subject)) {
+      subSel.value = prefs.subject;
+      populateTopicDropdown(prefs.subject);
+      // Now restore topic selection
+      const topicSelNow = document.getElementById('focus-topic-select');
+      if (topicSelNow && prefs.topic) {
+        const matchOpt = [...topicSelNow.options].find(o => o.value === prefs.topic);
+        if (matchOpt) topicSelNow.value = prefs.topic;
+      }
+    }
+  }
 
   // Set active task label
   if (activeLabel) activeLabel.textContent = `${prefs.subject}: ${prefs.topic}`;

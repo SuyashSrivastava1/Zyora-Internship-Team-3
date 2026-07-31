@@ -11,6 +11,7 @@ function initSubjects() {
   setupAddSubjectForm();
   setupAddTopicForm();
   setupSubjectFilter();
+  refreshSubjectDropdown(); // populate dropdown from localStorage on init
 }
 
 // ─── Render All Subject Cards ─────────────────────────────────────────────────

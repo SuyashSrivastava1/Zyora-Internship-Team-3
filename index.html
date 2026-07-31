@@ -36,10 +36,22 @@
     <section class="card" id="welcome-banner">
       <div>
         <h2>Welcome back, Suyash! 👋</h2>
-        <p>You are on a 5-day study streak! Keep up the momentum for your upcoming midterms.</p>
+        <p>You are on a <span id="banner-streak">5</span>-day study streak! Keep up the momentum for your upcoming midterms.</p>
       </div>
       <div>
         <a href="pages/timer.html" class="btn">▶️ Launch 25-Min Focus Session</a>
+      </div>
+    </section>
+
+    <!-- Quote of the Day — Fetch API Card -->
+    <section class="card" id="quote-section" aria-label="Motivational Quote of the Day">
+      <h3>💡 Quote of the Day</h3>
+      <div id="quote-content">
+        <!-- JS will render: loading → success → error -->
+        <div class="fetch-loading" id="quote-loading">
+          <div class="spinner" role="status" aria-label="Loading quote..."></div>
+          <span>Fetching today's quote…</span>
+        </div>
       </div>
     </section>
 

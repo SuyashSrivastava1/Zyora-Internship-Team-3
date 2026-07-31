@@ -11,7 +11,149 @@ function initDashboard() {
   loadPriorityTopics();
   setupSearchForm();
   setupQuickAddForm();
+  updateBannerStreak();
+  fetchQuoteOfDay();
 }
+
+// ─── Banner Streak Inline Update ─────────────────────────────────────────────
+function updateBannerStreak() {
+  const el = document.getElementById('banner-streak');
+  if (el) el.textContent = getStreak();
+}
+
+// ─── Fetch: Quote of the Day ──────────────────────────────────────────────────
+// dummyjson.com is CORS-safe and highly reliable
+const QUOTE_API = 'https://dummyjson.com/quotes/random';
+
+// Local fallback quotes — shown if API is unreachable
+const FALLBACK_QUOTES = [
+  { quote: 'The secret of getting ahead is getting started.', author: 'Mark Twain' },
+  { quote: 'An investment in knowledge pays the best interest.', author: 'Benjamin Franklin' },
+  { quote: 'Education is the most powerful weapon which you can use to change the world.', author: 'Nelson Mandela' },
+  { quote: 'The beautiful thing about learning is that no one can take it away from you.', author: 'B.B. King' },
+  { quote: 'Study without desire spoils the memory, and it retains nothing that it takes in.', author: 'Leonardo da Vinci' },
+];
+
+async function fetchQuoteOfDay() {
+  const container = document.getElementById('quote-content');
+  if (!container) return;
+
+  // ── State 1: Loading ──
+  showQuoteLoading(container);
+
+  try {
+    const controller = new AbortController();
+    const timeoutId  = setTimeout(() => controller.abort(), 7000);
+
+    const response = await fetch(QUOTE_API, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // dummyjson returns: { id, quote, author }
+    const quoteObj = Array.isArray(data) ? data[0] : data;
+
+    if (!quoteObj || (!quoteObj.quote && !quoteObj.content)) {
+      throw new Error('Unexpected API shape.');
+    }
+
+    // Normalise field names (dummyjson → 'quote', quotable → 'content')
+    const normalised = {
+      content: quoteObj.quote || quoteObj.content,
+      author:  quoteObj.author,
+      tags:    quoteObj.tags || [],
+    };
+
+    // ── State 2: Success ──
+    showQuoteSuccess(container, normalised);
+
+  } catch (err) {
+    // Only treat as truly offline if navigator says so OR request was aborted
+    const isOffline = !navigator.onLine || err.name === 'AbortError';
+
+    if (isOffline) {
+      // Show offline error + local fallback below it
+      showQuoteError(container, true);
+    } else {
+      // API error but user IS online — silently fall back to a local quote
+      const fallback = FALLBACK_QUOTES[Math.floor(Math.random() * FALLBACK_QUOTES.length)];
+      const normalised = { content: fallback.quote, author: fallback.author, tags: ['inspiration'] };
+      showQuoteSuccess(container, normalised, /* isFallback */ true);
+    }
+  }
+}
+
+// ── Render: Loading ───────────────────────────────────────────────────────────
+function showQuoteLoading(container) {
+  container.innerHTML = `
+    <div class="fetch-loading" id="quote-loading" aria-live="polite">
+      <div class="spinner" role="status" aria-label="Loading quote..."></div>
+      <span>Fetching today's quote…</span>
+    </div>`;
+}
+
+// ── Render: Success ───────────────────────────────────────────────────────────
+function showQuoteSuccess(container, quote, isFallback = false) {
+  const tags = (quote.tags || []).slice(0, 3).map(t =>
+    `<span class="quote-tag">${escapeHtml(t)}</span>`
+  ).join('');
+
+  const fallbackNote = isFallback
+    ? `<small style="color:var(--text-muted);font-size:0.78rem;">📚 Showing a saved quote — API unavailable</small>`
+    : '';
+
+  container.innerHTML = `
+    <div class="quote-card" aria-live="polite">
+      <p class="quote-text">"${escapeHtml(quote.content)}"</p>
+      <p class="quote-author">— ${escapeHtml(quote.author)}</p>
+      ${tags ? `<div class="quote-tags">${tags}</div>` : ''}
+      ${fallbackNote}
+      <button class="quote-refresh-btn" id="quote-refresh-btn" type="button" aria-label="Load another quote">
+        🔄 New Quote
+      </button>
+    </div>`;
+
+  document.getElementById('quote-refresh-btn')?.addEventListener('click', fetchQuoteOfDay);
+}
+
+// ── Render: Error (offline only) ──────────────────────────────────────────────
+function showQuoteError(container, isOffline) {
+  const msg    = isOffline
+    ? 'You appear to be offline. Connect to the internet to load a daily quote.'
+    : 'Could not load a quote right now.';
+  const detail = isOffline
+    ? 'Your study data is safely stored offline — everything else still works!'
+    : 'All local features (timer, subjects, progress) continue to work normally.';
+
+  container.innerHTML = `
+    <div class="fetch-error" role="alert" aria-live="assertive">
+      <div class="fetch-error-icon">${isOffline ? '📡' : '⚠️'}</div>
+      <div class="fetch-error-body">
+        <p>${msg}</p>
+        <small>${detail}</small>
+        <br>
+        <button class="quote-refresh-btn" id="quote-retry-btn" type="button" aria-label="Retry fetching quote">
+          🔄 Try Again
+        </button>
+      </div>
+    </div>`;
+
+  document.getElementById('quote-retry-btn')?.addEventListener('click', fetchQuoteOfDay);
+}
+
+// ── Utility: HTML Escape ─────────────────────────────────────────────────────
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 
 // ─── Load & Render Stats ──────────────────────────────────────────────────────
 function loadDashboardStats() {

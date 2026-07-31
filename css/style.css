@@ -954,3 +954,159 @@ footer p {
     max-width: none;
   }
 }
+
+/* ==========================================================================
+   Day 3 — Fetch API States: Loading Spinner, Quote Card, Offline Error
+   ========================================================================== */
+
+/* --- Spinner Animation --- */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(99, 102, 241, 0.2);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+/* --- Fetch Loading State --- */
+.fetch-loading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+}
+
+/* --- Quote Card (Success State) --- */
+.quote-card {
+  animation: fadeInUp 0.4s ease;
+}
+
+.quote-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.65;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--primary);
+  margin-bottom: 0.75rem;
+}
+
+.quote-author {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.quote-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.quote-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+/* --- Fetch Error / Offline State --- */
+.fetch-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: rgba(239, 68, 68, 0.07);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  animation: fadeInUp 0.3s ease;
+}
+
+.fetch-error-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.fetch-error-body p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--danger);
+  margin-bottom: 0.2rem;
+}
+
+.fetch-error-body small {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.quote-refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 0.75rem;
+}
+
+.quote-refresh-btn:hover {
+  color: var(--text);
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+/* --- Quote of the Day Card Container --- */
+#quote-section {
+  border-left: 4px solid var(--primary);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, var(--bg-card) 100%);
+}
+
+#quote-section h3 {
+  margin-bottom: 1rem;
+}
+
+/* --- Progress Bar Base (if missing) --- */
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 100px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}

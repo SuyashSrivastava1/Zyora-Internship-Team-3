@@ -220,5 +220,17 @@ function uid() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 }
 
-// Run nav highlighting on every page
-document.addEventListener('DOMContentLoaded', highlightActiveNav);
+// ─── Live Streak Pill Update ──────────────────────────────────────────────────
+function updateStreakPill() {
+  const streak = getStreak();
+  // Update header pill (present on every page)
+  document.querySelectorAll('.streak-pill').forEach(el => {
+    el.textContent = `🔥 ${streak} Day Streak`;
+  });
+}
+
+// Run nav highlighting + streak pill on every page
+document.addEventListener('DOMContentLoaded', () => {
+  highlightActiveNav();
+  updateStreakPill();
+});
