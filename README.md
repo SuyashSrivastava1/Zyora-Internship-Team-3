@@ -1,108 +1,187 @@
-# 📚 StudyBuddy — Study Planner
+﻿# 📚 StudyBuddy — Personal Study Planner & Pomodoro Tracker
 
-> **Zyora Internship | Team 3**
+> **Zyora Internship · Team 3**
 
-A personal study planner built with pure HTML5, responsive CSS3, and vanilla JavaScript. No build step — open `index.html` in any modern browser and it works.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://zyora-internship-team-3.vercel.app)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/Vanilla%20JS-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+A zero-dependency, zero-build-step personal study planner. Open `index.html` in any modern browser and it works — everything persists via `localStorage`. No frameworks, no accounts, no server required.
 
 ---
 
-## 🗂 Folder Structure & Architecture
+## 🌐 Live Demo
+
+**[https://zyora-internship-team-3.vercel.app](https://zyora-internship-team-3.vercel.app)**
+
+---
+
+## ✨ Features
+
+### 📊 Dashboard
+- Live study streak counter with glowing fire animation
+- 4 stat cards: streak days, active subjects, topics completed, total study time
+- **Fetch API — Quote of the Day**: animated loading → success → graceful offline fallback (with retry)
+- High-priority topic checklist with live checkbox sync to `localStorage`
+- Search & filter topics by keyword, subject, and priority (live as you type)
+- Quick-add topic form with validation
+
+### 📘 Subjects & Topics
+- Add/delete subjects with course codes, target hours, and categories
+- Add/delete topics per subject with priority levels and estimated study time
+- Progress bars per subject (live — update on checkbox change)
+- Filter topics by keyword and completion status (pending / completed)
+- Duplicate code and title prevention
+
+### ⏱️ Pomodoro Timer
+- 25-minute focus timer with short (5m) and long (15m) break modes
+- Clock changes colour by mode: cyan (work), green (short break), amber (long break)
+- Dynamic subject & topic selector populated from `localStorage`
+- Auto-start breaks on timer completion (configurable)
+- Saves completed sessions to `localStorage` and auto-increments daily streak
+- Manual session logger for offline/textbook study
+- Session history table (last 10 sessions)
+
+### 📈 Progress Analytics
+- Overall completion banner with live progress bar
+- Per-subject progress cards with topic breakdown (live from `localStorage`)
+- Dynamic achievement badges based on streak + session count + topics completed
+- Weekly goal-setting form (target hours + topics + self-reflection notes)
+- Date range analytics filter UI
+
+### 📱 Responsive Design (Mobile-First)
+- **4 breakpoints**: 900px, 768px, 480px, 360px
+- Hamburger navigation menu on ≤ 768px with animated ☰ → ✕ toggle
+- 44px minimum touch targets on all interactive elements
+- Timer mode buttons & controls stack full-width on small screens
+- Form rows collapse to single column on mobile
+- Emoji favicon shown on all pages
+
+---
+
+## 📸 Screenshots
+
+| Dashboard | Pomodoro Timer |
+|-----------|---------------|
+| ![Dashboard](images/screenshot-dashboard.png) | ![Timer](images/screenshot-timer.png) |
+
+| Subjects & Topics | Progress Analytics |
+|-------------------|--------------------|
+| ![Subjects](images/screenshot-subjects.png) | ![Progress](images/screenshot-progress.png) |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Structure | HTML5 (Semantic elements, ARIA labels) |
+| Styling | Vanilla CSS3 (Design tokens, CSS custom properties, Grid, Flexbox) |
+| Logic | Vanilla JavaScript ES6+ (`localStorage`, Fetch API, AbortController) |
+| Fonts | [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans) + [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) via Google Fonts |
+| Hosting | Vercel (static deploy, zero config) |
+
+**No frameworks. No bundlers. No npm install.** Pure web platform APIs only.
+
+---
+
+## 🗂 Project Structure
 
 ```
 zyora-intrnship-team-3/
-├── index.html            # Dashboard — Main Landing Page (Suyash)
+├── index.html            # Dashboard (Suyash)
 ├── pages/
-│   ├── timer.html        # Pomodoro Focus Timer (Suyash)
-│   ├── subjects.html     # Subjects & Topics Checklist (Akshaya)
-│   └── progress.html     # Progress Analytics & Streak Tracker (Akshaya)
+│   ├── timer.html        # Pomodoro Timer (Suyash)
+│   ├── subjects.html     # Subjects & Topics (Akshaya)
+│   └── progress.html     # Progress Analytics (Akshaya)
 ├── css/
-│   └── style.css         # Centralized Design Tokens, Layout & JS-state Styles
+│   └── style.css         # Shared design system & all responsive styles
 ├── js/
-│   ├── script.js         # Shared: localStorage layer, toast, validation, nav
-│   ├── dashboard.js      # Dashboard logic + fetch() Quote of the Day API
-│   ├── subjects.js       # Subjects & Topics CRUD, filter, dropdowns
-│   ├── timer.js          # Pomodoro timer engine, dynamic dropdowns, session log
-│   └── progress.js       # Progress analytics, streak, badges, weekly goals
-└── images/               # Project Assets & Screenshots
+│   ├── script.js         # Shared: localStorage, toast, validation, mobile nav
+│   ├── dashboard.js      # Dashboard: stats, priority list, search, fetch quote
+│   ├── subjects.js       # Subjects CRUD, topic CRUD, filter, dropdowns
+│   ├── timer.js          # Timer engine, dynamic dropdowns, session logging
+│   └── progress.js       # Progress cards, streak, badges, weekly goals
+└── images/               # Screenshots & assets
 ```
 
 ---
 
-## 👥 Member Split & Responsibilities
+## 👥 Team & Responsibilities
 
-| Member | Assigned Pages & Modules | Deliverables |
-|--------|--------------------------|--------------|
-| **Suyash Srivastava** | `index.html` (Dashboard)<br>`pages/timer.html` (Pomodoro Timer) | • Dashboard Hero, Quick Stats, Priority Topic Checklist<br>• **fetch() Quote of the Day API** with loading → success → error states<br>• Search & Topic Filter Form<br>• Quick Topic Creation Form<br>• 25-Min Pomodoro Display & Timer Controls<br>• Timer Settings Form (dynamic subject/topic dropdowns from localStorage)<br>• Manual Session Logger |
-| **A. Akshaya** | `pages/subjects.html` (Subjects)<br>`pages/progress.html` (Progress) | • Subject cards & topic checklists (dynamic from localStorage)<br>• Add Subject & Add Topic forms with validation<br>• Completion progress bars (live-updating)<br>• Streak calendar & weekly target forms<br>• Progress analytics: per-subject cards, overall banner, achievements |
-
----
-
-## ✅ What Works (as of Day 3)
-
-### Data Layer — localStorage
-- All study data (subjects, topics, sessions, streak, timer prefs, weekly goals) persists in `localStorage` across page refreshes
-- Subjects and topics can be created, completed, and deleted — changes reflect on Dashboard, Timer, and Progress pages in real time
-- Pomodoro sessions auto-log to history on timer completion; manual sessions can also be logged
-- Streak counter increments once per calendar day on any session completion
-
-### Fetch API — Quote of the Day (Dashboard)
-- Fetches a motivational education quote from `api.quotable.io` on Dashboard load
-- **Loading state**: animated spinner shown while request is in-flight (8-second timeout)
-- **Success state**: quote text, author, and topic tags rendered with fade-in animation; "New Quote" button to fetch another
-- **Error/Offline state**: red banner with contextual message (`📡 offline` vs `⚠️ API error`), friendly note that local features still work, and a "Try Again" retry button — no silent failures
-
-### Forms & Validation
-- All forms validate on submit with inline field-level error messages
-- Duplicate subject code prevention on Add Subject
-- Duplicate topic title prevention within a subject
-- Date range validation on Progress filter (end ≥ start)
-- Timer settings validate duration ranges (1–120 min work, 1–30 min break)
-
-### Responsive Design
-- Breakpoints at 768px and 480px — all layouts collapse to single column
-- Navigation collapses vertically on small screens
-- Timer controls stack vertically on mobile
-
-### Navigation
-- All 4 pages fully linked in header nav and footer
-- Active page highlighted via JS (works correctly for both root and `pages/` paths)
-- Live streak pill in header updates from localStorage on every page
-
-### Dynamic Dropdowns (Day 3 Fix)
-- Timer page subject and topic selects now dynamically populate from localStorage
-- Selecting a subject on the Timer page cascades to show that subject's topics
-- Previously saved subject/topic prefs are restored on page load
-- Subjects page "Add Topic" dropdown is populated from localStorage on init and after every new subject is added or deleted
+| Member | Pages | Key Deliverables |
+|--------|-------|-----------------|
+| **Suyash Srivastava** | `index.html` · `pages/timer.html` | Dashboard stats & search · Fetch API Quote of the Day · Pomodoro timer engine · Timer settings & session log |
+| **A. Akshaya** | `pages/subjects.html` · `pages/progress.html` | Subject/topic CRUD with validation · Progress bars · Streak & achievement badges · Weekly goal form |
 
 ---
 
-## 🚧 What's Left / Known Gaps
+## 🚀 Run Locally
 
-- **Chart/graph visualizations** on the Progress page (currently text-based progress bars only)
-- **Date-aware session filtering** — the date range filter on Progress shows a toast but doesn't yet filter rendered data (data model doesn't timestamp sessions)
-- **User name editing** — hard-coded as "Suyash" / "Akshaya" per page; no profile settings page
-- **Streak reset logic** — streak only increments, doesn't automatically reset to 0 after a missed day (would need a background check against `sb_last_study_date`)
-- **Export / share data** — no way to export progress as PDF or share
+**Option 1 — Just open the file (simplest):**
+```
+Double-click index.html in your file explorer
+```
 
----
+> ⚠️ Some browsers block `localStorage` on bare `file://` URLs. Use Option 2 if so.
 
-## 🌐 Pages Overview
-
-1. **Dashboard** (`index.html`) — Overview: live streak, quick stats, fetch-powered quote of the day, high-priority topic checklist, search/filter, and quick topic creation form.
-2. **Subjects & Topics** (`pages/subjects.html`) — Manage subjects with course codes and target hours, add/delete topics, track completion with progress bars, and filter by keyword or status.
-3. **Pomodoro Timer** (`pages/timer.html`) — 25-min focus timer, break modes, dynamic subject/topic selector (reads from localStorage), auto-break toggle, manual session logger, and session history table.
-4. **Progress Analytics** (`pages/progress.html`) — Overall completion banner, per-subject progress cards (live from localStorage), achievements & streak badges, weekly goal setting form with self-reflection notes.
-
----
-
-## 🚀 Getting Started
-zyora-internship-team-3.vercel.app
-
-Open `index.html` in any modern web browser — no build step needed.
-
+**Option 2 — Static server (recommended):**
 ```bash
-# Or serve locally with any static server, e.g.:
+# Using npx serve (Node.js required)
 npx serve .
-```
 
-> **Offline note**: All study data (subjects, sessions, streak) works fully offline via localStorage. Only the Quote of the Day card on the Dashboard requires internet access — it degrades gracefully with a friendly offline message.
+# Or Python's built-in server
+python -m http.server 8000
+```
+Then visit `http://localhost:8000`
+
+**Option 3 — VS Code Live Server:**
+Install the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer), right-click `index.html` → *Open with Live Server*.
+
+---
+
+## 💾 Data Model
+
+All data is stored in `localStorage` under these keys:
+
+| Key | Contents |
+|-----|---------|
+| `sb_subjects` | Array of subjects with nested topics, priorities, and completion state |
+| `sb_sessions` | Array of logged study sessions (Pomodoro + manual) |
+| `sb_streak` | Current study streak (integer, days) |
+| `sb_last_study_date` | Last date a session was completed (for streak logic) |
+| `sb_timer_prefs` | Saved timer durations, subject, topic, and auto-break setting |
+| `sb_weekly_goal` | Target hours, target topics, and reflection notes |
+
+To **reset all data**: open the browser console and run `localStorage.clear()`, then refresh.
+
+---
+
+## 🌐 External API
+
+| API | Usage | Fallback |
+|-----|-------|---------|
+| `dummyjson.com/quotes/random` | Quote of the Day on Dashboard | 5 built-in inspirational quotes shown if offline or API times out |
+
+The app works **fully offline** except for the Quote card. An 8-second `AbortController` timeout and graceful error state ensure a smooth experience without internet.
+
+---
+
+## 🚧 Known Limitations
+
+- **Date-based session filtering** on the Progress page is UI-only — the data model does not timestamp individual sessions, so filtering by date range shows a toast but does not yet re-render data.
+- **Streak reset** — the counter only increments; it does not automatically reset to 0 after a missed day (would need a background check against `sb_last_study_date` on every page load).
+- **Chart visualizations** — progress is shown as animated bar fills, not SVG/Canvas charts.
+- **User profiles** — names are hardcoded per page; no settings page to change them.
+- **Export / sharing** — no PDF export or shareable progress link.
+
+---
+
+## 📄 License
+
+MIT — free to use, fork, and learn from.
+
+---
+
+*Built with 💜 by Suyash Srivastava & A. Akshaya · Zyora Internship Team 3*

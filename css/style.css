@@ -250,6 +250,8 @@ main {
 
 .card:hover {
   border-color: var(--border-hover);
+  box-shadow: 0 12px 32px -8px rgba(99, 102, 241, 0.18);
+  transform: translateY(-1px);
 }
 
 .card h3 {
@@ -696,6 +698,28 @@ footer p {
   color: var(--primary);
 }
 
+/* --- Accessibility: focus-visible rings --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove default outline for mouse users, keep for keyboard */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Scroll margin so sticky header doesn't cover anchor targets */
+[id] {
+  scroll-margin-top: 80px;
+}
+
 /* ==========================================================================
    Mobile & Tablet Responsiveness — Full Overhaul
    ========================================================================== */
@@ -751,14 +775,13 @@ footer p {
   }
 
   nav a {
-    display: block;
+    display: flex;
+    align-items: center;
     text-align: left;
     padding: 0.85rem 1.1rem;
     border-radius: 8px;
     font-size: 0.95rem;
     min-height: 44px;
-    display: flex;
-    align-items: center;
   }
 
   /* User badge fills remaining space beside logo */
@@ -1156,6 +1179,17 @@ footer p {
 
 .empty-state-card span { font-size: 2.5rem; }
 
+.empty-state-row td {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem !important;
+  font-style: italic;
+}
+
+/* Target the row itself when JS sets the class on <tr> */
+.empty-state-row {
+  text-align: center;
+}
 .empty-state-row td {
   text-align: center;
   color: var(--text-muted);

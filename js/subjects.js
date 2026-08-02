@@ -358,9 +358,9 @@ function refreshSubjectDropdown() {
 
 // ─── Utility Helpers ──────────────────────────────────────────────────────────
 function getPriorityForSubject(sub) {
-  const haHigh = sub.topics.some(t => t.priority === 'high' && !t.completed);
+  const hasHigh   = sub.topics.some(t => t.priority === 'high'   && !t.completed);
   const hasMedium = sub.topics.some(t => t.priority === 'medium' && !t.completed);
-  if (haHigh) return 'high';
+  if (hasHigh)   return 'high';
   if (hasMedium) return 'medium';
   return 'low';
 }

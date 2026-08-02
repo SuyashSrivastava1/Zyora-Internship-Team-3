@@ -241,7 +241,7 @@ function initMobileNav() {
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
-  // Close nav when a link is tapped (single-page navigation feel)
+  // Close nav when a link is tapped
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('nav-open');
@@ -250,14 +250,21 @@ function initMobileNav() {
     });
   });
 
-  // Close nav when clicking outside the header
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('header')) {
-      nav.classList.remove('nav-open');
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  });
+  // Close nav when clicking outside the header — guard against duplicate listeners
+  if (!document._navOutsideClickBound) {
+    document._navOutsideClickBound = true;
+    document.addEventListener('click', (e) => {
+      const currentNav    = document.getElementById('main-nav');
+      const currentToggle = document.getElementById('nav-toggle');
+      if (currentNav && !e.target.closest('header')) {
+        currentNav.classList.remove('nav-open');
+        if (currentToggle) {
+          currentToggle.classList.remove('open');
+          currentToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  }
 }
 
 // Run nav highlighting + streak pill + mobile nav on every page

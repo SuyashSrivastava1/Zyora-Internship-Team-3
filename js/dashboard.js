@@ -12,6 +12,7 @@ function initDashboard() {
   setupSearchForm();
   setupQuickAddForm();
   updateBannerStreak();
+  populateDashboardSubjectFilter();
   fetchQuoteOfDay();
 }
 
@@ -171,7 +172,6 @@ function loadDashboardStats() {
   setStatValue('stat-subjects', subjects.length);
   setStatValue('stat-topics',   `${completedTopics} / ${totalTopics}`);
   setStatValue('stat-time',     hours > 0 ? `${hours}h ${mins}m` : `${mins}m`);
-  setStatValue('stat-streak-pill', `🔥 ${streak} Day Streak`);
 }
 
 function setStatValue(id, value) {
@@ -287,6 +287,21 @@ function resetSearch() {
   if (subjectSel)  subjectSel.value  = 'all';
   if (prioritySel) prioritySel.value = 'all';
   loadPriorityTopics();
+}
+
+// ─── Populate Search Subject Dropdown Dynamically ─────────────────────────────
+function populateDashboardSubjectFilter() {
+  const sel = document.getElementById('filter-subject');
+  if (!sel) return;
+  const subjects = getSubjects();
+  // Clear all options except the first ("All Subjects")
+  sel.innerHTML = '<option value="all">All Subjects</option>';
+  subjects.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.code;
+    opt.textContent = `${s.code}: ${s.name}`;
+    sel.appendChild(opt);
+  });
 }
 
 // ─── Quick Add Topic Form ─────────────────────────────────────────────────────

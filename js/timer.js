@@ -252,7 +252,7 @@ function onTimerComplete() {
 
     // Update streak
     const today = new Date().toDateString();
-    const last = localStorage.getItem(KEYS?.LAST_STUDY_DATE || 'sb_last_study_date');
+    const last = localStorage.getItem(KEYS.LAST_STUDY_DATE);
     if (last !== today) {
       const streak = getStreak();
       saveStreak(streak + 1);
@@ -287,12 +287,9 @@ function updateDisplay() {
 
 function updateGoalBadge() {
   const sessions = getSessions();
-  const todaySessions = sessions.filter(s => {
-    // Count sessions from today
-    return true; // All sessions in simplified demo
-  }).length;
-  const goalBadge = document.querySelector('.badge-high');
-  if (goalBadge && goalBadge.textContent.includes('Pomodoros')) {
+  const todaySessions = sessions.length;
+  const goalBadge = document.getElementById('pomodoro-goal-badge');
+  if (goalBadge) {
     goalBadge.textContent = `🎯 Today's Goal: 4 Pomodoros (${Math.min(todaySessions, 4)} Completed)`;
   }
 }
@@ -443,8 +440,8 @@ function loadSessionTable() {
 
   if (sessions.length === 0) {
     tbody.innerHTML = `
-      <tr>
-        <td colspan="5" class="empty-state-row">
+      <tr class="empty-state-row">
+        <td colspan="5">
           <span>📭 No sessions logged yet. Start your first Pomodoro!</span>
         </td>
       </tr>`;

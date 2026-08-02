@@ -89,7 +89,7 @@ function renderProgressCards() {
 function renderStreakCard() {
   const streak   = getStreak();
   const sessions = getSessions();
-  const total    = sessions.reduce((a, s) => a + s.duration, 0);
+  const total    = sessions.reduce((a, s) => a + (s.duration || 0), 0);
   const subjects = getSubjects();
   const { completedTopics } = calcStats(subjects);
 
