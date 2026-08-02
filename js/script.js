@@ -229,8 +229,40 @@ function updateStreakPill() {
   });
 }
 
-// Run nav highlighting + streak pill on every page
+// ─── Hamburger Menu Toggle ────────────────────────────────────────────────────
+function initMobileNav() {
+  const toggle = document.getElementById('nav-toggle');
+  const nav    = document.getElementById('main-nav');
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close nav when a link is tapped (single-page navigation feel)
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close nav when clicking outside the header
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('header')) {
+      nav.classList.remove('nav-open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+// Run nav highlighting + streak pill + mobile nav on every page
 document.addEventListener('DOMContentLoaded', () => {
   highlightActiveNav();
   updateStreakPill();
+  initMobileNav();
 });

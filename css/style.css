@@ -61,6 +61,49 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* --- Hamburger Menu Toggle --- */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 8px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.nav-toggle:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+  transform-origin: center;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 /* --- Header & Navigation --- */
 header {
   background: rgba(30, 41, 59, 0.85);
@@ -653,59 +696,291 @@ footer p {
   color: var(--primary);
 }
 
-/* --- Mobile & Tablet Responsiveness --- */
-@media (max-width: 768px) {
-  header {
-    padding: 1rem 1.25rem;
-    flex-direction: column;
-    align-items: stretch;
-  }
+/* ==========================================================================
+   Mobile & Tablet Responsiveness — Full Overhaul
+   ========================================================================== */
 
-  .logo-area {
-    justify-content: center;
-  }
-
-  nav ul {
-    justify-content: center;
-    width: 100%;
+/* --- Tablet (≤ 900px): tighten nav spacing --- */
+@media (max-width: 900px) {
+  nav a {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.875rem;
   }
 
   .user-badge {
-    justify-content: center;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* --- Mobile (≤ 768px): Hamburger nav, stacked header --- */
+@media (max-width: 768px) {
+  /* Header becomes a two-row bar: logo+toggle on row 1, user-badge on row 2 */
+  header {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
   }
 
+  /* Show hamburger */
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Nav hidden by default — slides down when open */
+  nav {
+    order: 3;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  nav.nav-open {
+    max-height: 400px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    border-radius: var(--radius-sm);
+    gap: 0.35rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+  }
+
+  nav a {
+    display: block;
+    text-align: left;
+    padding: 0.85rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* User badge fills remaining space beside logo */
+  .user-badge {
+    margin-left: auto;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .streak-pill {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.55rem;
+  }
+
+  /* Main content */
   main {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 1rem;
     gap: 1.5rem;
   }
 
-  .timer-clock {
-    font-size: 4rem;
-  }
-
+  /* All grids go single column */
   .grid-2, .grid-4 {
     grid-template-columns: 1fr;
   }
 
+  /* Welcome banner stacks */
   #welcome-banner {
     flex-direction: column;
     align-items: stretch;
     text-align: center;
+    padding: 1.5rem;
+  }
+
+  #welcome-banner h2 {
+    font-size: 1.45rem;
   }
 
   #welcome-banner .btn {
     width: 100%;
   }
-}
 
-@media (max-width: 480px) {
-  nav ul {
-    flex-direction: column;
-    border-radius: var(--radius-sm);
+  /* Page header typography */
+  .page-header h2 {
+    font-size: 1.5rem;
   }
 
-  nav a {
-    text-align: center;
+  /* Stat cards */
+  .stat-card {
+    padding: 1.1rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.75rem;
+  }
+
+  /* Cards */
+  .card {
+    padding: 1.25rem;
+  }
+
+  /* Timer */
+  .timer-clock {
+    font-size: 3.75rem;
+    letter-spacing: 2px;
+  }
+
+  .timer-box {
+    padding: 2rem 1.25rem;
+  }
+
+  .timer-mode-group {
+    gap: 0.6rem;
+  }
+
+  .timer-mode-group .btn {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .timer-controls {
+    gap: 0.75rem;
+  }
+
+  .timer-controls .btn {
+    width: auto;
+    flex: 1;
+    padding: 0.85rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Subject search bar: stack vertically */
+  #subject-search-bar .form-row {
+    flex-direction: column;
+  }
+
+  .filter-form-row .form-group {
+    min-width: 0;
+  }
+
+  /* Form rows: allow wrapping to single column */
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row .form-group {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  /* Subject card header */
+  .subject-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Topic items: shrink badge area */
+  .topic-item {
+    padding: 0.85rem 1rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* Progress summary */
+  .progress-summary-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .progress-percentage-large {
+    font-size: 2rem;
+  }
+
+  .streak-title {
+    font-size: 1.3rem;
+  }
+
+  /* Footer links wrap properly */
+  .footer-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  footer {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* --- Small Mobile (≤ 480px): fine-tune for 375px phones --- */
+@media (max-width: 480px) {
+  header {
+    padding: 0.65rem 0.875rem;
+  }
+
+  .logo-area h1 {
+    font-size: 1.35rem;
+  }
+
+  .logo-area span {
+    font-size: 1.6rem;
+  }
+
+  .user-badge > span:first-child {
+    display: none; /* hide name, keep streak pill only */
+  }
+
+  main {
+    padding: 1rem 0.875rem;
+    gap: 1.25rem;
+  }
+
+  .card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  #welcome-banner h2 {
+    font-size: 1.25rem;
+  }
+
+  #welcome-banner p {
+    font-size: 0.9rem;
+  }
+
+  .page-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .stat-value {
+    font-size: 1.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .timer-clock {
+    font-size: 3.2rem;
+    letter-spacing: 1px;
+  }
+
+  .timer-mode-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timer-mode-group .btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
   }
 
   .timer-controls {
@@ -714,6 +989,58 @@ footer p {
 
   .timer-controls .btn {
     width: 100%;
+    flex: none;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 0.65rem;
+    align-items: center;
+  }
+
+  /* Toast: full-width at bottom */
+  .toast {
+    bottom: 1rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    max-width: none;
+    min-width: 0;
+  }
+
+  /* Table: allow scroll on very small screens */
+  .table-wrapper {
+    font-size: 0.82rem;
+  }
+
+  .session-table th,
+  .session-table td {
+    padding: 0.75rem 0.75rem;
+  }
+}
+
+/* --- Very small (≤ 360px): last resort adjustments --- */
+@media (max-width: 360px) {
+  .logo-area h1 {
+    font-size: 1.2rem;
+  }
+
+  .timer-clock {
+    font-size: 2.75rem;
+  }
+
+  nav a {
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
   }
 }
 
@@ -946,14 +1273,7 @@ footer p {
 .progress-cyan  { background: linear-gradient(90deg, #06b6d4, #10b981) !important; }
 .progress-amber { background: linear-gradient(90deg, #f59e0b, #ef4444) !important; }
 
-@media (max-width: 480px) {
-  .toast {
-    bottom: 1rem;
-    right: 1rem;
-    left: 1rem;
-    max-width: none;
-  }
-}
+/* Toast mobile styles handled in the mobile breakpoints above */
 
 /* ==========================================================================
    Day 3 — Fetch API States: Loading Spinner, Quote Card, Offline Error
