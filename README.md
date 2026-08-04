@@ -69,11 +69,7 @@ A zero-dependency, zero-build-step personal study planner. Open `index.html` in 
 | Subjects & Topics | Progress Analytics |
 |-------------------|--------------------|
 | ![Subjects](images/screenshot-subjects.png) | ![Progress](images/screenshot-progress.png) |
-| Subjects & Topics | Progress Analytics |
-|-------------------|--------------------|
-| ![Subjects](images/screenshot 2026-08-04 183703.png) | ![Progress](images/screenshot 2026-08-04 183741.png) |
----
-
+https://github.com/SuyashSrivastava1/Zyora-Internship-Team-3/blob/8cdf9f4b3d71a32093aeb91ff0ccc413eb733ed3/images/Screenshot%202026-08-04%20183741.png
 ## 🛠 Tech Stack
 
 | Layer | Technology |
